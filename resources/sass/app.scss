@@ -6,3 +6,122 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+.sidenav {
+    height: 100%;
+    background-color: #17a2b8;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.main {
+    padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+}
+
+@media screen and (max-width: 450px) {
+    .login-form{
+        margin-top: 10%;
+    }
+
+    .register-form{
+        margin-top: 10%;
+    }
+}
+
+@media screen and (min-width: 768px){
+    .main{
+        margin-left: 40%; 
+    }
+
+    .sidenav{
+        width: 40%;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+    }
+
+    .login-form{
+        margin-top: 60%;
+    }
+
+    .register-form{
+        margin-top: 20%;
+    }
+}
+
+
+.main-text{
+    margin-top: 20%;
+    padding: 60px;
+    color: #fff;
+}
+
+.main-text h2{
+    font-weight: 300;
+}
+
+.btn-blue{
+    background-color: #17a2b8 !important;
+    color: #fff;
+}
+
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    background: #17a2b8;
+    color: #fff;
+    min-height: 100vh;
+}
+
+#sidebar .sidebar-header {
+    padding: 20px;
+    background: #118496;
+}
+
+#sidebar ul p {
+    padding: 10px;
+}
+
+#sidebar ul li a {
+    padding: 10px;
+    font-size: 0.8em;
+    display: block;
+    color: #fff;
+}
+
+#sidebar ul li a:hover {
+    color: #fff;
+    background: #118496;
+}
+
+#sidebar ul li.active>a {
+    color: #118496;
+    background: #fff;
+}
+
+#page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+}
+
+#list-customer {
+    max-height: 80vh;
+    margin-bottom: 10px;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+
+#list-customer::-webkit-scrollbar {
+    display: none;
+}

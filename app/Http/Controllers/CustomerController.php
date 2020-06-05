@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Customer;
+use App\Http\Requests\CustomerRequest;
+use App\Http\Resources\Customer as CustomerResource;
 
 class CustomerController extends Controller
 {
@@ -15,10 +17,7 @@ class CustomerController extends Controller
     public function index()
     {
         $customer = Customer::All();
-        return response()->json([
-            'message' => 'List all customer',
-            'data' => $customer
-        ]);
+        return CustomerResource::collection($customer);
     }
 
     /**
@@ -37,21 +36,10 @@ class CustomerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CustomerRequest $request)
     {
-        $data = $request->validate([
-            'user_id' => 'required|string',
-            'name' => 'required|string',
-            'email' => 'required|email:unique',
-            'telephone' => 'required|string',
-            'address' => 'required|string',
-        ]);
-
-        $customer = Customer::create($data);
-        return response()->json([
-            'message' => 'Customer was added successfully',
-            'data' => $customer,
-        ]);
+        $customer = $request->user()->customer()->create($request->validated());
+        return (new CustomerResource($customer))->response()->setStatusCode(201);
     }
 
     /**
@@ -60,9 +48,9 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Customer $customer)
     {
-        //
+        return (new CustomerResource($customer));
     }
 
     /**
@@ -83,9 +71,10 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CustomerRequest $request, Customer $customer)
     {
-        //
+        $customer->update($request->validated());
+        return (new CustomerResource($customer))->response()->setStatusCode(200);
     }
 
     /**
@@ -94,8 +83,11 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Customer $customer)
     {
-        //
+        $customer->delete();
+        return response()->json([
+            'message' => 'Customer was deleted succesfully',
+        ], 200);
     }
 }

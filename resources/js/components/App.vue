@@ -7,13 +7,13 @@
             
             <ul class="list-unstyled">
                 <li :class="{ 'active': title === 'Create Customer' }">
-                    <router-link to="/customers/create">Add New Customer</router-link>
+                    <router-link to="/customers/create"><i class="fa fa-plus"></i> Add New Customer</router-link>
                 </li>
                 <li :class="{ 'active': title === 'List Customer' }">
-                    <router-link to="/customers">All Customers</router-link>
+                    <router-link to="/customers"><i class="fa fa-list"></i> All Customers</router-link>
                 </li>
                 <li>
-                    <a href="#"> Logout</a>
+                    <router-link to="/logout"><i class="fa fa-sign-out"></i> Logout</router-link>
                 </li>
             </ul>
         </nav>
@@ -21,21 +21,22 @@
         <div id="page-content-wrapper">
             <nav class="navbar navbar-light bg-light mt-4 border-bottom border-secondary">
                 <div class="navbar-brand">{{ title }}</div>
-                <div>
-                    <input class="form-control mr-sm-2" id="searchTerm" placeholder="Search...">
-                </div>
+                <Search />
             </nav>
 
             <div class="container-fluid pt-4">
-                <router-view></router-view>
+                <router-view :key="$route.fullPath"></router-view>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import Search from './Search';
 export default {
     name: 'App',
+
+    components: { Search },
 
     props: ['user'],
 

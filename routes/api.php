@@ -16,4 +16,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:api')->group(function () {
     Route::resource('/customers', 'CustomerController');
+
+    Route::post('search', 'SearchController@index');
 });

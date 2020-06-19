@@ -5,6 +5,7 @@ import CustomersIndex from './views/CustomersIndex';
 import CustomersCreate from './views/CustomersCreate';
 import CustomersDetail from './views/CustomersDetail';
 import CustomersEdit from './views/CustomersEdit';
+import Logout from './components/Logout';
 
 Vue.use(VueRouter);
 
@@ -29,6 +30,9 @@ export default new VueRouter({
         {
             path: '/customers/:id/edit', component: CustomersEdit,
             meta: { title: 'Edit Customer' }
+        },
+        {
+            path: '/logout', component: Logout
         }
     ],
     mode: 'history'

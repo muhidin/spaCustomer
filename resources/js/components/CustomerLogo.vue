@@ -10,7 +10,12 @@ export default {
 
     computed: {
         customerLogo: function () {
-            return this.name.slice(0, 2);
+            var nama = this.name.split(" ")
+            if(nama.length > 1) {
+                return nama[0].slice(0,1) + nama[nama.length-1].slice(0,1);
+            }else{
+                return this.name.slice(0, 2);
+            }
         }
     }
 }
